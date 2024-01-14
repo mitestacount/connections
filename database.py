@@ -1,5 +1,8 @@
 import sqlite3
 import logging
+import pathlib
+CURRENT_FILE_DIRECTORY = pathlib.Path(__file__).parent.resolve()
+DB_FILE = 'data/example.db'
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -7,7 +10,8 @@ logger = logging.getLogger(__name__)
 
 class DatabaseTest:
 
-    __database = "./data/example.db"
+    __database = str(pathlib.PurePath(CURRENT_FILE_DIRECTORY,
+                                      DB_FILE)).replace('\\', '/')
 
     @classmethod
     def __getconnection(cls):
